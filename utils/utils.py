@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 
 import nltk
-
 nltk.download('reuters')
 from nltk.corpus import reuters
 
 START_TOKEN = '<START>'
 END_TOKEN = '<END>'
 
-
-def readCorpus(category="crude"):
+def read_corpus(category="crude"):
     """ Read files from the specified Reuter's category.
         Params:
             category (string): category name

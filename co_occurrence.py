@@ -11,8 +11,7 @@ sys.path.append(os.path.abspath(os.path.join('..')))
 
 from utils.sanity_checks import *
 
-
-def distinctWords(corpus):
+def distinct_words(corpus):
     """ Determine a list of distinct words for the corpus.
         Params:
             corpus (list of list of strings): corpus of documents
@@ -22,14 +21,14 @@ def distinctWords(corpus):
     """
     corpus_words = []
     num_corpus_words = -1
-
-    ### SOLUTION BEGIN
-    ### SOLUTION END
+    
+### SOLUTION BEGIN
+### SOLUTION END
 
     return corpus_words, num_corpus_words
 
 
-def computeCoOccurrenceMatrix(corpus, window_size=4):
+def compute_co_occurrence_matrix(corpus, window_size=4):
     """ Compute co-occurrence matrix for the given corpus and window_size (default of 4).
     
         Note: Each word in a document should be at the center of a window. Words near edges will have a smaller
@@ -43,80 +42,77 @@ def computeCoOccurrenceMatrix(corpus, window_size=4):
             window_size (int): size of context window
         Return:
             M (numpy matrix of shape (number of unique words in the corpus , number of unique words in the corpus)):
-                Co-occurence matrix of word counts. 
+                Co-occurrence matrix of word counts. 
                 The ordering of the words in the rows/columns should be the same as the ordering of the words given by the distinct_words function.
             word2Ind (dict): dictionary that maps word to index (i.e. row/column number) for matrix M.
     """
-    words, num_words = distinctWords(corpus)
+    words, num_words = distinct_words(corpus)
     M = None
     word2Ind = {}
-
-    ### SOLUTION BEGIN
-    ### SOLUTION END
+    
+### SOLUTION BEGIN
+### SOLUTION END
 
     return M, word2Ind
 
 
-def reduceToKDim(M, k=2):
-    """ Reduce a co-occurence count matrix of dimensionality (num_corpus_words, num_corpus_words)
+def reduce_to_k_dim(M, k=2):
+    """ Reduce a co-occurrence count matrix of dimensionality (num_corpus_words, num_corpus_words)
         to a matrix of dimensionality (num_corpus_words, k) using the following SVD function from Scikit-Learn:
             - http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html
     
         Params:
-            M (numpy matrix of shape (number of unique words in the corpus , number of number of corpus words)): co-occurence matrix of word counts
+            M (numpy matrix of shape (number of unique words in the corpus , number of number of corpus words)): co-occurrence matrix of word counts
             k (int): embedding size of each word after dimension reduction
         Return:
             M_reduced (numpy matrix of shape (number of corpus words, k)): matrix of k-dimensioal word embeddings.
                     In terms of the SVD from math class, this actually returns U * S
-    """
+    """    
     np.random.seed(4355)
-    n_iters = 10  # Use this parameter in your call to `TruncatedSVD`
+    n_iters = 10     # Use this parameter in your call to `TruncatedSVD`
     M_reduced = None
     print("Running Truncated SVD over %i words..." % (M.shape[0]))
-
+    
     ### SOLUTION BEGIN
     ### SOLUTION END
 
     print("Done.")
     return M_reduced
 
-
 #############################################
 # Testing functions below. DO NOT MODIFY!   #
 #############################################
 
-def test_distinctWords():
-    print("\n\t\t\t Testing distinctWords \t\t\t")
+def test_distinct_words():
+    print("\n\t\t\t Testing distinct_words \t\t\t")
 
-    test_corpus = toyCorpus()
-    test_corpus_words, num_corpus_words = distinctWords(test_corpus)
+    test_corpus = toy_corpus()
+    test_corpus_words, num_corpus_words = distinct_words(test_corpus)
 
-    ans_test_corpus_words = sorted(
-        list(set(["START", "All", "ends", "that", "gold", "All's", "glitters", "isn't", "well", "END"])))
+    ans_test_corpus_words = sorted(list(set(["START", "All", "ends", "that", "gold", "All's", "glitters", "isn't", "well", "END"])))
     ans_num_corpus_words = len(ans_test_corpus_words)
 
     print("\nYour Result:")
     print(
         "Words in corpus: {}\n Number of words in corpus: {}\n".format(test_corpus_words,
-                                                                       num_corpus_words
-                                                                       )
+                                                                        num_corpus_words
+                                                                        )
     )
 
     print("Expected Result:")
     print(
         "Words in corpus: {}\n Number of words in corpus: {}\n".format(ans_test_corpus_words,
-                                                                       ans_num_corpus_words
-                                                                       )
+                                                                        ans_num_corpus_words
+                                                                        )
     )
 
+def test_compute_co_occurrence_matrix():
+    print("\n\t\t\t Testing compute_co_occurrence_matrix \t\t\t")
 
-def test_computeCoOccurenceMatrix():
-    print("\n\t\t\t Testing computeCoOccurrenceMatrix \t\t\t")
+    test_corpus = toy_corpus()
+    M_test, word2Ind_test = compute_co_occurrence_matrix(test_corpus, window_size=2)
 
-    test_corpus = toyCorpus()
-    M_test, word2Ind_test = computeCoOccurrenceMatrix(test_corpus, window_size=2)
-
-    M_test_ans, word2Ind_test_ans = toyCorpusCoOccurence()
+    M_test_ans, word2Ind_test_ans = toy_corpus_co_occurrence()
 
     for w1 in word2Ind_test_ans.keys():
         idx1 = word2Ind_test_ans[w1]
@@ -129,45 +125,41 @@ def test_computeCoOccurenceMatrix():
                 print(M_test_ans)
                 print("Your M: ")
                 print(M_test)
-                raise AssertionError(
-                    "Incorrect count at index ({}, {})=({}, {}) in matrix M. Yours has {} but should have {}.".format(
-                        idx1, idx2, w1, w2, student, correct))
+                raise AssertionError("Incorrect count at index ({}, {})=({}, {}) in matrix M. Yours has {} but should have {}.".format(idx1, idx2, w1, w2, student, correct))
 
     print("\nYour Result:")
     print(
-        "Shape of co-occurence matrix: {}\n Word to index map: {}\n".format(M_test.shape,
-                                                                            word2Ind_test
-                                                                            )
+        "Shape of co-occurrence matrix: {}\n Word to index map: {}\n".format(M_test.shape,
+                                                                        word2Ind_test
+                                                                        )
     )
 
     print("\nExpected Result:")
     print(
-        "Shape of co-occurence matrix: {}\n Word to index map: {}\n".format(M_test_ans.shape,
-                                                                            word2Ind_test_ans
-                                                                            )
+        "Shape of co-occurrence matrix: {}\n Word to index map: {}\n".format(M_test_ans.shape,
+                                                                        word2Ind_test_ans
+                                                                        )
     )
 
-
-def test_reduceToKDim():
+def test_reduce_to_k_dim():
     print("\n\t\t\t Testing reduceToKDim \t\t\t")
 
-    M_test_ans, word2Ind_test_ans = toyCorpusCoOccurence()
-    M_test_reduced = reduceToKDim(M_test_ans, k=2)
+    M_test_ans, word2Ind_test_ans = toy_corpus_co_occurrence()
+    M_test_reduced = reduce_to_k_dim(M_test_ans, k=2)
 
     print("\nYour Result:")
     print(
-        "Shape of reduced dim co-occurence matrix: {}\n".format(M_test_reduced.shape
-                                                                )
+        "Shape of reduced dim co-occurrence matrix: {}\n".format(M_test_reduced.shape
+                                                                        )
     )
 
     print("\nExpected Result:")
     print(
-        "Shape of reduced dim co-occurence matrix: {}\n".format((10, 2)
-                                                                )
+        "Shape of reduced dim co-occurrence matrix: {}\n".format((10, 2)
+                                                                        )
     )
 
-
 if __name__ == "__main__":
-    test_distinctWords()
-    test_computeCoOccurenceMatrix()
-    test_reduceToKDim()
+    test_distinct_words()
+    test_compute_co_occurrence_matrix()
+    test_reduce_to_k_dim()
