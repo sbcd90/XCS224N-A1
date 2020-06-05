@@ -36,7 +36,11 @@ python run.py
 # zip the assignment submission folder
 sh collect_submission.sh
 ```
-
+**In case you have trouble with the provided `collect_submission.sh` script, submit the following files:**
+```
+co_occurrence_embeddings.png
+co_occurrence.py
+```
 
 - Miscellaneous
 
