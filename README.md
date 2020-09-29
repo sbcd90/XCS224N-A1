@@ -23,7 +23,7 @@ conda deactivate
 
 - Perform sanity checks on `computeCoOccurrenceMatrix`, `distinctWords` and `reduceToKDim`
 ```
-python co_occurence.py
+python co_occurrence.py
 ```
 
 - Compute `co-occurrence`, run `SVD` and create `co_occurence_embeddings.png`
