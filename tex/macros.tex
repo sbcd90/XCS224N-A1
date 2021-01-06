@@ -7,6 +7,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -131,6 +134,8 @@
 \renewcommand{\comment}[1]{}
 \newcommand{\mc}[1]{\mathcal{#1}}
 \newcommand{\half}{\frac{1}{2}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 \def\KL{D_{KL}}
 \def\xsi{x^{(i)}}
