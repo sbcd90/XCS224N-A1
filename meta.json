@@ -5,5 +5,5 @@
   "tex_show_autograder_instructions":true,
   "tex_show_honor_code": true,
   "tex_preamble":"",
-  "single_submission_file":true
+  "multifile_coding_submission":false
 }

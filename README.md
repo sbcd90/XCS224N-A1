@@ -18,10 +18,10 @@ instructions below).
 
 
 ## Running the autograder locally
-All assignment code is in the `src/` subirectory.  You will submit only the
-`src/submission.py` file.  Please only make changes between the lines containing
-`### START CODE HERE ###` and `### END CODE HERE ###`. Do not make changes to
-files other than `src/submission.py`.
+All assignment code is in the `src/` subirectory.  Please only make changes
+between the lines containing `### START CODE HERE ###` and
+`### END CODE HERE ###`.  All your code will be typed into either
+`src/submission.py` or the files within the `src/submission/` subdirectory.
 
 The unit tests in `src/grader.py` will be used to autograde your submission.
 Run the autograder locally using the following terminal command within the
