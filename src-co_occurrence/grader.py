@@ -96,7 +96,7 @@ class Test_1(GradedTestCase):
 
     self.assertEqual(student_result, soln_result)
 
-  @graded(is_hidden=True)
+  @graded(is_hidden=True, timeout=20)
   def test_4(self):
     """1b-4-hidden:  Test compute_co_occurrence_matrix() with full corpus."""
     corpus = read_corpus()
