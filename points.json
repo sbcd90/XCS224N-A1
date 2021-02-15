@@ -2,6 +2,7 @@
   "1a-0-basic" : {"points":1, "question_id":"1a", "is_written":false, "is_coding":true, "is_extra_credit":false},
   "1b-1-basic" : {"points":2, "question_id":"1b", "is_written":false, "is_coding":true, "is_extra_credit":false},
   "1c-2-basic" : {"points":1, "question_id":"1c", "is_written":false, "is_coding":true, "is_extra_credit":false},
+  
   "1a-3-hidden" : {"points":1, "question_id":"1a", "is_written":false, "is_coding":true, "is_extra_credit":false},
   "1b-4-hidden" : {"points":3, "question_id":"1b", "is_written":false, "is_coding":true, "is_extra_credit":false},
   "1c-5-hidden" : {"points":1, "question_id":"1c", "is_written":false, "is_coding":true, "is_extra_credit":false},
