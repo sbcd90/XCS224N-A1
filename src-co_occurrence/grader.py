@@ -2,6 +2,7 @@
 import unittest, random, sys, copy, argparse, inspect
 from graderUtil import graded, CourseTestRunner, GradedTestCase
 import numpy as np
+import traceback
 
 # Import student submission
 import submission
@@ -12,36 +13,24 @@ from utils import *
 #############################################
 
 def toy_corpus():
-  toy_corpus = ["START All that glitters isn't gold END".split(" "), "START All's well that ends well END".split(" ")] 
+  toy_corpus = ["START All that glitters isn't gold END".split(" "), "START All's well that ends well END".split(" ")]
   return toy_corpus
 
 def toy_corpus_co_occurrence():
   ### co-occurrence matric for toy_corpus with window_size = 2
-  # M = np.array( 
-  # [[0., 0., 0., 1., 0., 1., 0., 0., 1., 0.,],
-  #  [0., 0., 0., 1., 0., 0., 0., 0., 1., 1.,],
-  #  [0., 0., 0., 0., 1., 0., 1., 1., 0., 1.,],
-  #  [1., 1., 0., 0., 0., 0., 0., 0., 1., 1.,],
-  #  [0., 0., 1., 0., 0., 0., 0., 0., 1., 2.,],
-  #  [1., 0., 0., 0., 0., 0., 1., 1., 1., 0.,],
-  #  [0., 0., 1., 0., 0., 1., 0., 1., 0., 0.,],
-  #  [0., 0., 1., 0., 0., 1., 1., 0., 1., 0.,],
-  #  [1., 1., 0., 1., 1., 1., 0., 1., 0., 2.,],
-  #  [0., 1., 1., 1., 2., 0., 0., 0., 2., 0.,]]
-  # )
-  M = np.array( 
-  [[0., 0., 0., 1., 0., 1., 0., 1., 1., 0.,],
-   [0., 0., 0., 1., 1., 0., 0., 0., 1., 1.,],
-   [0., 0., 0., 0., 1., 1., 1., 1., 1., 1.,],
-   [1., 1., 0., 0., 0., 1., 0., 0., 2., 1.,],
-   [0., 1., 1., 0., 0., 0., 0., 0., 1., 2.,],
-   [1., 0., 1., 1., 0., 0., 1., 1., 1., 0.,],
-   [0., 0., 1., 0., 0., 1., 0., 1., 1., 0.,],
-   [1., 0., 1., 0., 0., 1., 1., 0., 1., 0.,],
-   [1., 1., 1., 2., 1., 1., 1., 1., 0., 2.,],
-   [0., 1., 1., 1., 2., 0., 0., 0., 2., 2.,]]
+  M = np.array(
+  [[0., 0., 0., 1., 0., 1., 0., 0., 1., 0.,],
+   [0., 0., 0., 1., 0., 0., 0., 0., 1., 1.,],
+   [0., 0., 0., 0., 1., 0., 1., 1., 0., 1.,],
+   [1., 1., 0., 0., 0., 0., 0., 0., 1., 1.,],
+   [0., 0., 1., 0., 0., 0., 0., 0., 1., 2.,],
+   [1., 0., 0., 0., 0., 0., 1., 1., 1., 0.,],
+   [0., 0., 1., 0., 0., 1., 0., 1., 0., 0.,],
+   [0., 0., 1., 0., 0., 1., 1., 0., 1., 0.,],
+   [1., 1., 0., 1., 1., 1., 0., 1., 0., 2.,],
+   [0., 1., 1., 1., 2., 0., 0., 0., 2., 0.,]]
   )
-  
+
   word2Ind = {'All': 0, "All's": 1, 'END': 2, 'START': 3, 'ends': 4, 'glitters': 5, 'gold': 6, "isn't": 7, 'that': 8, 'well': 9}
   return M, word2Ind
 
@@ -71,7 +60,7 @@ class Test_1(GradedTestCase):
     """1b-1-basic:  Sanity check for compute_co_occurrence_matrix()"""
 
     test_corpus = toy_corpus()
-    M_test, word2Ind_test = submission.compute_co_occurrence_matrix(test_corpus, window_size=3)
+    M_test, word2Ind_test = submission.compute_co_occurrence_matrix(test_corpus, window_size=2)
 
     M_test_ans, word2Ind_test_ans = toy_corpus_co_occurrence()
 
