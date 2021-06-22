@@ -44,7 +44,7 @@ class Test_1(GradedTestCase):
 
   @graded()
   def test_0(self):
-    """1a-0-basic:  Sanity check for distinct_words()"""
+    """1-0-basic:  Sanity check for distinct_words()"""
 
     test_corpus = toy_corpus()
     test_corpus_words, num_corpus_words = submission.distinct_words(test_corpus)
@@ -57,7 +57,7 @@ class Test_1(GradedTestCase):
 
   @graded()
   def test_1(self):
-    """1b-1-basic:  Sanity check for compute_co_occurrence_matrix()"""
+    """1-1-basic:  Sanity check for compute_co_occurrence_matrix()"""
 
     test_corpus = toy_corpus()
     M_test, word2Ind_test = submission.compute_co_occurrence_matrix(test_corpus, window_size=2)
@@ -81,7 +81,7 @@ class Test_1(GradedTestCase):
 
   @graded()
   def test_2(self):
-    """1c-2-basic:  Sanity check for reduce_to_k_dim()"""
+    """1-2-basic:  Sanity check for reduce_to_k_dim()"""
 
     M_test_ans, word2Ind_test_ans = toy_corpus_co_occurrence()
     M_test_reduced = submission.reduce_to_k_dim(M_test_ans, k=2)
@@ -89,7 +89,7 @@ class Test_1(GradedTestCase):
 
   @graded(is_hidden=True)
   def test_3(self):
-    """1a-3-hidden:  Test distinct_words() with full corpus."""
+    """1-3-hidden:  Test distinct_words() with full corpus."""
     corpus = read_corpus()
 
     student_result, _ = submission.distinct_words(corpus.copy())
@@ -99,7 +99,7 @@ class Test_1(GradedTestCase):
 
   @graded(is_hidden=True, timeout=20)
   def test_4(self):
-    """1b-4-hidden:  Test compute_co_occurrence_matrix() with full corpus."""
+    """1-4-hidden:  Test compute_co_occurrence_matrix() with full corpus."""
     corpus = read_corpus()
     window_size = 4
     student_matrix, student_dict = submission.compute_co_occurrence_matrix(corpus.copy(), window_size)
@@ -110,7 +110,7 @@ class Test_1(GradedTestCase):
 
   @graded(is_hidden=True)
   def test_5(self):
-    """1c-5-hidden:  Test reduce_to_k_dim() with full corpus."""
+    """1-5-hidden:  Test reduce_to_k_dim() with full corpus."""
     random.seed(35436)
     np.random.seed(4355)
 
