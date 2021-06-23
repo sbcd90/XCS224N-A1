@@ -22,7 +22,7 @@ def distinct_words(corpus):
     """
     corpus_words = []
     num_corpus_words = -1
-    
+
     # ### START CODE HERE ###
     # ### END CODE HERE ###
 
@@ -30,26 +30,26 @@ def distinct_words(corpus):
 
 def compute_co_occurrence_matrix(corpus, window_size=4):
     """ Compute co-occurrence matrix for the given corpus and window_size (default of 4).
-    
+
         Note: Each word in a document should be at the center of a window. Words near edges will have a smaller
               number of co-occurring words.
-              
+
               For example, if we take the document "START All that glitters is not gold END" with window size of 4,
               "All" will co-occur with "START", "that", "glitters", "is", and "not".
-    
+
         Params:
             corpus (list of list of strings): corpus of documents
             window_size (int): size of context window
         Return:
             M (numpy matrix of shape (number of unique words in the corpus , number of unique words in the corpus)):
-                Co-occurrence matrix of word counts. 
+                Co-occurrence matrix of word counts.
                 The ordering of the words in the rows/columns should be the same as the ordering of the words given by the distinct_words function.
             word2Ind (dict): dictionary that maps word to index (i.e. row/column number) for matrix M.
     """
     words, num_words = distinct_words(corpus)
     M = None
     word2Ind = {}
-    
+
     # ### START CODE HERE ###
     # ### END CODE HERE ###
 
@@ -59,19 +59,19 @@ def reduce_to_k_dim(M, k=2):
     """ Reduce a co-occurrence count matrix of dimensionality (num_corpus_words, num_corpus_words)
         to a matrix of dimensionality (num_corpus_words, k) using the following SVD function from Scikit-Learn:
             - http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html
-    
+
         Params:
-            M (numpy matrix of shape (number of unique words in the corpus , number of number of corpus words)): co-occurrence matrix of word counts
+            M (numpy matrix of shape (number of unique words in the corpus , number of corpus words)): co-occurrence matrix of word counts
             k (int): embedding size of each word after dimension reduction
         Return:
             M_reduced (numpy matrix of shape (number of corpus words, k)): matrix of k-dimensioal word embeddings.
                     In terms of the SVD from math class, this actually returns U * S
-    """    
+    """
     np.random.seed(4355)
     n_iters = 10     # Use this parameter in your call to `TruncatedSVD`
     M_reduced = None
     print("Running Truncated SVD over %i words..." % (M.shape[0]))
-    
+
     # ### START CODE HERE ###
     # ### END CODE HERE ###
 
