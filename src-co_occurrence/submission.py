@@ -21,7 +21,7 @@ def distinct_words(corpus):
             num_corpus_words (integer): number of distinct words across the corpus
     """
     corpus_words = []
-    num_corpus_words = -1
+    num_corpus_words = 0
 
     # ### START CODE HERE ###
     # ### END CODE HERE ###
