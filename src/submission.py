@@ -68,7 +68,7 @@ def reduce_to_k_dim(M, k=2):
                     In terms of the SVD from math class, this actually returns U * S
     """
     np.random.seed(4355)
-    n_iters = 10     # Use this parameter in your call to `TruncatedSVD`
+    n_iter = 10     # Use this parameter in your call to `TruncatedSVD`
     M_reduced = None
     print("Running Truncated SVD over %i words..." % (M.shape[0]))
 
