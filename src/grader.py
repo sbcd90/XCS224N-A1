@@ -108,7 +108,7 @@ class Test_1(GradedTestCase):
     self.assertEqual(np.linalg.norm(student_matrix - soln_matrix), 0)
     self.assertEqual(solution_dict, student_dict)
 
-  @graded(is_hidden=True)
+#  @graded(is_hidden=True)
   def test_5(self):
     """1-5-hidden:  Test reduce_to_k_dim() with full corpus."""
     random.seed(35436)

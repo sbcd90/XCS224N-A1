@@ -11,6 +11,7 @@ from sklearn.decomposition import PCA
 
 sys.path.append(os.path.abspath(os.path.join('..')))
 
+
 def distinct_words(corpus):
     """ Determine a list of distinct words for the corpus.
         Params:
@@ -23,9 +24,14 @@ def distinct_words(corpus):
     num_corpus_words = 0
 
     # ### START CODE HERE ###
+    [[corpus_words.append(word) for word in sentence] for sentence in corpus]
+
+    corpus_words = sorted(list(set(corpus_words)))
+    num_corpus_words = len(corpus_words)
     # ### END CODE HERE ###
 
     return corpus_words, num_corpus_words
+
 
 def compute_co_occurrence_matrix(corpus, window_size=4):
     """ Compute co-occurrence matrix for the given corpus and window_size (default of 4).
@@ -50,9 +56,18 @@ def compute_co_occurrence_matrix(corpus, window_size=4):
     word2Ind = {}
 
     # ### START CODE HERE ###
+    word2Ind = dict([(word, idx) for idx, word in enumerate(words)])
+    M = np.zeros((len(words), len(words)))
+
+    for sentence in corpus:
+        for idx, word in enumerate(sentence):
+            for opt in range(max(0, idx - window_size), min(idx + window_size + 1, len(sentence))):
+                if idx != opt:
+                    M[word2Ind[word]][word2Ind[sentence[opt]]] += 1
     # ### END CODE HERE ###
 
     return M, word2Ind
+
 
 def reduce_to_k_dim(M, k=2):
     """ Reduce a co-occurrence count matrix of dimensionality (num_corpus_words, num_corpus_words)
@@ -72,10 +87,13 @@ def reduce_to_k_dim(M, k=2):
     print("Running Truncated SVD over %i words..." % (M.shape[0]))
 
     # ### START CODE HERE ###
+    svd = TruncatedSVD(n_components=k, n_iter=n_iter, random_state=4355, tol=1e-5)
+    M_reduced = svd.fit_transform(M)
     # ### END CODE HERE ###
 
     print("Done.")
     return M_reduced
+
 
 def main():
     matplotlib.use('agg')
@@ -85,7 +103,6 @@ def main():
     assert sys.version_info[1] >= 5
 
     def plot_embeddings(M_reduced, word2Ind, words, title):
-
         for word in words:
             idx = word2Ind[word]
             x = M_reduced[idx, 0]
@@ -94,17 +111,18 @@ def main():
             plt.text(x, y, word, fontsize=9)
         plt.savefig(title)
 
-    #Read in the corpus
+    # Read in the corpus
     reuters_corpus = read_corpus()
 
     M_co_occurrence, word2Ind_co_occurrence = compute_co_occurrence_matrix(reuters_corpus)
     M_reduced_co_occurrence = reduce_to_k_dim(M_co_occurrence, k=2)
     # Rescale (normalize) the rows to make them each of unit-length
     M_lengths = np.linalg.norm(M_reduced_co_occurrence, axis=1)
-    M_normalized = M_reduced_co_occurrence / M_lengths[:, np.newaxis] # broadcasting
+    M_normalized = M_reduced_co_occurrence / M_lengths[:, np.newaxis]  # broadcasting
 
     words = ['barrels', 'bpd', 'ecuador', 'energy', 'industry', 'kuwait', 'oil', 'output', 'petroleum', 'venezuela']
     plot_embeddings(M_normalized, word2Ind_co_occurrence, words, 'co_occurrence_embeddings_(soln).png')
+
 
 if __name__ == "__main__":
     main()
